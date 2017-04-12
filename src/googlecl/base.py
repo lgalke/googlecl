@@ -11,6 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from __future__ import print_function
+from builtins import input
 
 
 """Basic abilities that all GoogleCL clients have."""
@@ -106,7 +108,7 @@ class BaseCL(object):
                               (entry_type, '%s'))
         for item in entries:
             if prompt:
-                delete_str = raw_input(prompt_message %
+                delete_str = input(prompt_message %
                                        safe_encode(item.title.text))
                 if not delete_str:
                     delete = False
@@ -229,10 +231,10 @@ class BaseCL(object):
             # Attempt to catch older gdata users and warn them when they try to upload
             # unsupported file types
             if "403.4 SSL required" in error_string:
-                print "\n\nIf you are trying upload to Google Docs, your version of "
-                print "python-gdata may not support this action. Please see this wiki page "
-                print "for more details:"
-                print "http://code.google.com/p/googlecl/wiki/UploadingGoogleDocs\n\n"
+                print("\n\nIf you are trying upload to Google Docs, your version of ")
+                print("python-gdata may not support this action. Please see this wiki page ")
+                print("for more details:")
+                print("http://code.google.com/p/googlecl/wiki/UploadingGoogleDocs\n\n")
             return []
         all_entries = feed.entry
         if feed.GetNextLink():
@@ -312,13 +314,13 @@ class BaseCL(object):
         if len(entries) == 1:
             return entries[0]
         elif len(entries) > 1:
-            print 'More than one match for title ' + (title or '')
+            print('More than one match for title ' + (title or ''))
             for num, entry in enumerate(entries):
-                print '%i) %s' % (num, safe_decode(entry.title.text))
+                print('%i) %s' % (num, safe_decode(entry.title.text)))
             selection = -1
             while selection < 0 or selection > len(entries) - 1:
                 selection = int(
-                    raw_input('Please select one of the items by number: '))
+                    input('Please select one of the items by number: '))
             return entries[selection]
 
     GetSingleEntry = get_single_entry

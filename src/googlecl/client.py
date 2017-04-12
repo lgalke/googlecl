@@ -17,6 +17,8 @@
   the command line."""
 
 
+from __future__ import print_function
+from builtins import input
 import gdata.client
 import googlecl
 import googlecl.base
@@ -118,12 +120,12 @@ class BaseClientCL(googlecl.base.BaseCL):
                 # Blanket catch of Exception is a bad idea, but don't want to pass in
                 # error to look for.
                 LOG.error('Failed to launch web browser: ' + unicode(err))
-        print 'Please log in and/or grant access at %s' % auth_url
+        print('Please log in and/or grant access at %s' % auth_url)
         # Try to keep that damn "Created new window in existing browser session."
         # message away from raw_input call.
         time.sleep(2)
-        print ''
-        request_token.verifier = raw_input('Please enter the verification code on'
+        print('')
+        request_token.verifier = input('Please enter the verification code on'
                                            ' the success page: ').strip()
         # This upgrades the token, and if successful, sets the access token
         try:

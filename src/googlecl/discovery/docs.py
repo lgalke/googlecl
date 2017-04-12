@@ -19,6 +19,7 @@ In charge of saving/loading the API directory,
 and retrieves and stores the Discovery documents.
 """
 
+from __future__ import print_function
 import httplib2
 import logging
 
@@ -193,37 +194,37 @@ def help(doc, verbose, *path):
     if not verbose:
         if isinstance(base, dict):
             if 'version' in base:  # Base API
-                print ' ' + base['description']
-                print '  Resources: ' + ', '.join(base['resources'])
+                print(' ' + base['description'])
+                print('  Resources: ' + ', '.join(base['resources']))
             elif 'httpMethod' in base:  # Method
-                print ' ' + base['description']
+                print(' ' + base['description'])
                 if 'parameterOrder' in base:
-                    print '  Requires: ' + ' AND '.join(base['parameterOrder']) \
+                    print('  Requires: ' + ' AND '.join(base['parameterOrder']) \
                         + ' Optional: ' + ', '.join([i for i in base['parameters'] if
-                                                     i not in base['parameterOrder']])
+                                                     i not in base['parameterOrder']]))
                 elif 'parameters' in base:
-                    print '  Optional: ' + ', '.join(base['parameters'])
+                    print('  Optional: ' + ', '.join(base['parameters']))
                 if 'request' in base:
-                    print '  Request schema: ' + base['request']['$ref']
+                    print('  Request schema: ' + base['request']['$ref'])
             elif 'methods' in base or 'resources' in base:  # Resource
                 if 'methods' in base:
-                    print '  Methods: ' + ', '.join(base['methods'])
+                    print('  Methods: ' + ', '.join(base['methods']))
                 if 'resources' in base:
-                    print '  Resources: ' + ', '.join(base['resources'])
+                    print('  Resources: ' + ', '.join(base['resources']))
             else:  # Everything else
                 for obj in base:
                     if isinstance(base[obj], dict) or isinstance(base[obj], list):
-                        print '  ' + obj + ": " + ', '.join(base[obj])
+                        print('  ' + obj + ": " + ', '.join(base[obj]))
                     else:
-                        print '  ' + obj + ": " + str(base[obj])
+                        print('  ' + obj + ": " + str(base[obj]))
         else:
-            print base
+            print(base)
     else:
         if isinstance(base, dict):
             for obj in base:
                 if isinstance(base[obj], dict) or isinstance(base[obj], list):
-                    print '  ' + obj + ": " + ', '.join(base[obj])
+                    print('  ' + obj + ": " + ', '.join(base[obj]))
                 else:
-                    print '  ' + obj + ": " + str(base[obj])
+                    print('  ' + obj + ": " + str(base[obj]))
         else:
-            print base
+            print(base)

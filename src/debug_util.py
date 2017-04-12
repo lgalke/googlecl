@@ -17,6 +17,8 @@
 __author__ = 'thmiller@google.com (Tom Miller)'
 
 
+from __future__ import print_function
+from builtins import input
 import atom
 import inspect
 
@@ -41,22 +43,22 @@ def walk_attributes(myobject, object_name, tabitem='=', step=True, tablevel=0):
       NATHING!
 
     """
-    print tabitem * tablevel + 'Object: ' + object_name
-    print tabitem * tablevel + 'Type: ' + str(type(myobject))
+    print(tabitem * tablevel + 'Object: ' + object_name)
+    print(tabitem * tablevel + 'Type: ' + str(type(myobject)))
     attr_list = [attr for attr in dir(myobject)
                  if not attr.startswith('_') and
                  not inspect.ismethod(getattr(myobject, attr))]
-    print tabitem * tablevel + 'Attributes: '
-    print tabitem * tablevel + str(attr_list)
+    print(tabitem * tablevel + 'Attributes: ')
+    print(tabitem * tablevel + str(attr_list))
     dull_attr = [attr for attr in attr_list
                  if type(getattr(myobject, attr)) in dull_types]
     if dull_attr:
-        print tabitem * tablevel + '(basic attributes: ' + str(dull_attr) + ')'
+        print(tabitem * tablevel + '(basic attributes: ' + str(dull_attr) + ')')
 
     loopable_attr = [attr for attr in attr_list
                      if not type(getattr(myobject, attr)) in dull_types]
     for attr_name in loopable_attr:
         new_object = getattr(myobject, attr_name)
         if step:
-            raw_input('')
+            input('')
         walk_attributes(new_object, attr_name, tablevel=tablevel + 1)

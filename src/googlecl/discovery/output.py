@@ -17,6 +17,7 @@
 
 Manages the formatting and output of generated responses
 """
+from __future__ import print_function
 import pprint
 
 
@@ -28,7 +29,7 @@ def output(resp, mode='pprint'):
       mode: What type of formatting is used
     """
     if mode == 'none':
-        print resp
+        print(resp)
     elif mode == 'pprint':
         pprint.pprint(resp)
     elif mode == 'clean':
@@ -47,15 +48,15 @@ def cprint(resp, st=1):
     for arg in resp:
         if isinstance(resp, dict):
             if isinstance(resp[arg], dict) or isinstance(resp[arg], list):
-                print (' ' * st) + arg + ":"
+                print((' ' * st) + arg + ":")
                 cprint(resp[arg], st + 2)
             else:
                 try:
-                    print (' ' * st) + arg + ": " + str(resp[arg])
+                    print((' ' * st) + arg + ": " + str(resp[arg]))
                 except UnicodeEncodeError:
-                    print (' ' * st) + arg + ": " + resp[arg]
+                    print((' ' * st) + arg + ": " + resp[arg])
         else:
             if isinstance(arg, dict) or isinstance(arg, list):
                 cprint(arg, st)
             else:
-                print (' ' * st) + arg
+                print((' ' * st) + arg)

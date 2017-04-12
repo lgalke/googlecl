@@ -1,3 +1,5 @@
+from __future__ import print_function
+from builtins import input
 import os
 import httplib2
 import threading
@@ -5,12 +7,13 @@ import time
 from gdata.photos.service import PhotosService
 from gdata.docs.service import DocsService
 from gdata.blogger.service import BloggerService
-from gdata.contacts.service import  ContactsService
+from gdata.contacts.service import ContactsService
 from gdata.calendar.service import CalendarService
 from gdata.finance.service import FinanceService
 from gdata.youtube.service import YouTubeService
 from datetime import timedelta, datetime
 from oauth2client import client
+
 
 
 class Authenticate(object):
@@ -29,8 +32,8 @@ class Authenticate(object):
                                                   redirect_uri='urn:ietf:wg:oauth:2.0:oob')
 
             auth_uri = flow.step1_get_authorize_url()
-            print 'Authorization_URL: %s' % auth_uri
-            auth_code = raw_input('Enter the auth code: ')
+            print('Authorization_URL: %s' % auth_uri)
+            auth_code = input('Enter the auth code: ')
             credentials = flow.step2_exchange(auth_code)
             storage.put(credentials)
         return self.refresh_creds(credentials, 0)

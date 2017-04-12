@@ -27,6 +27,8 @@ Download docs:
 
 """
 from __future__ import with_statement
+from __future__ import print_function
+from builtins import input
 
 __author__ = 'tom.h.miller@gmail.com (Tom Miller)'
 import gdata.docs.client
@@ -280,11 +282,11 @@ class DocsClientCL(gdata.docs.client.DocsClient,
         try:
             content_type = MIMETYPES[file_ext.upper()]
         except KeyError:
-            print 'Could not find mimetype for ' + file_ext
+            print('Could not find mimetype for ' + file_ext)
             while file_ext not in MIMETYPES.keys():
-                file_ext = raw_input('Please enter one of ' +
-                                     MIMETYPES.keys() +
-                                     ' to determine the content type to upload as.')
+                file_ext = input('Please enter one of ' +
+                                 MIMETYPES.keys() +
+                                 ' to determine the content type to upload as.')
             content_type = MIMETYPES[file_ext.upper()]
         mediasource = gdata.data.MediaSource(file_path=path_to_new_content,
                                              content_type=content_type)

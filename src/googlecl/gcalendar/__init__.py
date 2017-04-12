@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Data for GoogleCL's calendar service."""
+from __future__ import print_function
 import datetime
 import googlecl
 import googlecl.base
@@ -33,7 +34,7 @@ def condense_recurring_events(events):
     seen_ids = []
     combined_events = []
     for event in events:
-        print "looking at event %s" % event.title.text
+        print("looking at event %s" % event.title.text)
         if event.original_event.id not in seen_ids:
             seen_ids.append(event.original_event.id)
             combined_events.append(event)
@@ -147,19 +148,19 @@ def filter_canceled_events(events, recurrences_expanded):
     is_canceled = lambda e: e.event_status.value == 'CANCELED' or not e.when
 
     for event in events:
-        print 'looking at event %s' % event.title.text
+        print('looking at event %s' % event.title.text)
         if recurrences_expanded:
             if event.original_event:
-                print 'event is original: %s' % event.title.text
+                print('event is original: %s' % event.title.text)
                 try:
                     status = canceled_recurring_events[event.original_event.id]
                 except KeyError:
                     status = None
                 if is_canceled(event) and status != AT_LEAST_ONE_EVENT:
-                    print 'adding event to canceled: %s' % event.title.text
+                    print('adding event to canceled: %s' % event.title.text)
                     canceled_recurring_events[event.original_event.id] = event
                 if not is_canceled(event):
-                    print 'at least one more of: %s' % event.title.text
+                    print('at least one more of: %s' % event.title.text)
                     canceled_recurring_events[
                         event.original_event.id] = AT_LEAST_ONE_EVENT
             ongoing_events.append(event)
@@ -283,8 +284,8 @@ def _list(client, options, args):
     parser = DateRangeParser()
     date_range = parser.parse(options.date)
     for cal in cal_user_list:
-        print ''
-        print safe_encode('[' + unicode(cal) + ']')
+        print('')
+        print(safe_encode('[' + unicode(cal) + ']'))
         single_events = client.get_events(cal.user,
                                           start_date=date_range.start,
                                           end_date=date_range.end,
@@ -293,7 +294,7 @@ def _list(client, options, args):
                                           split=False)
 
         for entry in single_events:
-            print googlecl.base.compile_entry_string(
+            print(googlecl.base.compile_entry_string()
                 CalendarEntryToStringWrapper(entry, client.config),
                 options.fields.split(','),
                 delimiter=options.delimiter)

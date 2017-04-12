@@ -21,6 +21,7 @@ import gdata.service
 import googlecl
 import googlecl.base
 import logging
+from builtins import input
 
 LOG = logging.getLogger(__name__)
 
@@ -131,7 +132,7 @@ class BaseServiceCL(googlecl.base.BaseCL):
                 LOG.error('Failed to launch web browser: ' + unicode(err))
         message = ('Please log in and/or grant access via your browser at: \n%s\n\n'
                    'Then, in this terminal, hit enter. ' % auth_url)
-        raw_input(message)
+        input(message)
         # This upgrades the token, and if successful, sets the access token
         try:
             self.UpgradeToOAuthAccessToken(request_token)

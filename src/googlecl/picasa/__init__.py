@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from __future__ import print_function
 import datetime
 import googlecl
 import googlecl.base
@@ -224,9 +225,9 @@ def _run_list(client, options, args):
     userfeed = client.GetUserFeed()
     entries = userfeed.entry
     for entry in entries:
-        print googlecl.base.compile_entry_string(PhotoEntryToStringWrapper(entry),
+        print(googlecl.base.compile_entry_string(PhotoEntryToStringWrapper(entry),
                                                  options.fields.split(','),
-                                                 delimiter=options.delimiter)
+                                                 delimiter=options.delimiter))
 
 
 def _run_list_albums(client, options, args):
@@ -235,9 +236,9 @@ def _run_list_albums(client, options, args):
                                       titles=titles_list,
                                       force_photos=False)
     for entry in entries:
-        print googlecl.base.compile_entry_string(AlbumEntryToStringWrapper(entry),
+        print(googlecl.base.compile_entry_string(AlbumEntryToStringWrapper(entry),
                                                  options.fields.split(','),
-                                                 delimiter=options.delimiter)
+                                                 delimiter=options.delimiter))
 
 
 def _run_post(client, options, args):

@@ -42,6 +42,8 @@ Some terminology in use:
 
 """
 from __future__ import with_statement
+from __future__ import print_function
+from builtins import input
 
 __author__ = 'tom.h.miller@gmail.com (Tom Miller)'
 import glob
@@ -80,12 +82,12 @@ class NonFatalOptionParser(optparse.OptionParser):
         self.error_message = message
 
     def bailout(self, message):
-        print self.usage, "\n\n", "FATAL ERROR:\n", message, "\n"
+        print(self.usage, "\n\n", "FATAL ERROR:\n", message, "\n")
         exit(1)
 
     def bailout_if_necessary(self):
         if hasattr(self, 'error_message'):
-            print self.usage, "\n\n", "FATAL ERROR:\n", self.error_message, "\n"
+            print(self.usage, "\n\n", "FATAL ERROR:\n", self.error_message, "\n")
             exit(1)
 
 # Attempts to sanely parse the command line, considering both the legacy gdata
@@ -276,7 +278,7 @@ def fill_out_options(args, service_header, task, options, config):
         if value:
             return value
         else:
-            return raw_input('Please specify ' + attr + ': ')
+            return input('Please specify ' + attr + ': ')
 
     if options.user is None:
         options.user = _retrieve_value('user', service_header)
@@ -291,7 +293,7 @@ def fill_out_options(args, service_header, task, options, config):
             if args:
                 value = args.pop(0)
             else:
-                value = raw_input('Please specify ' + attr + ': ')
+                value = input('Please specify ' + attr + ': ')
         setattr(options, attr, value)
 
     # Expand those options that might be a filename in disguise.
@@ -428,30 +430,30 @@ def print_help(service=None, tasks=None):
 
     """
     if not service:
-        print 'Welcome to the Google CL tool!'
-        print '  Commands are broken into several parts: '
-        print '    service, task, options, and arguments.'
-        print '  For example, in the command'
-        print '      "> picasa post --title "My Cat Photos" photos/cats/*"'
-        print '  the service is "picasa", the task is "post", the single'
-        print '  option is a title of "My Cat Photos", and the argument is the '
-        print '  path to the photos.'
-        print ''
-        print '  The available services are '
-        print str(AVAILABLE_SERVICES)[1:-1]
+        print('Welcome to the Google CL tool!')
+        print('  Commands are broken into several parts: ')
+        print('    service, task, options, and arguments.')
+        print('  For example, in the command')
+        print('      "> picasa post --title "My Cat Photos" photos/cats/*"')
+        print('  the service is "picasa", the task is "post", the single')
+        print('  option is a title of "My Cat Photos", and the argument is the ')
+        print('  path to the photos.')
+        print('')
+        print('  The available services are ')
+        print(str(AVAILABLE_SERVICES)[1:-1])
         if apis:
-            print '  and via Discovery:'
-            print str(AVAILABLE_APIS)[1:-1]
-            print '  Enter "> help more" for more detailed help.'
-        print '  Enter "> help <service>" for more information on a service.'
-        print '  Or, just "quit" to quit.'
+            print('  and via Discovery:')
+            print(str(AVAILABLE_APIS)[1:-1])
+            print('  Enter "> help more" for more detailed help.')
+        print('  Enter "> help <service>" for more information on a service.')
+        print('  Or, just "quit" to quit.')
     else:
-        print get_task_help(service, tasks)
+        print(get_task_help(service, tasks))
 
 
 def print_more_help():
     """ Prints additional help """
-    print """  Additional information:
+    print("""  Additional information:
     (For Discovery APIs)
   Enter "> help <service> <fields>" for additional info
   You may also add a '-v' or '--verbose' tag for even more detailed information.
@@ -463,7 +465,7 @@ def print_more_help():
   You may add more APIs by providing the path to their Discovery document in the
   config file, under the parameter 'local_apis'
 
-  Global config values may be viewed and edited with "> edit config" """
+  Global config values may be viewed and edited with "> edit config" """)
 
 
 def run_interactive(parser):
@@ -486,7 +488,7 @@ def run_interactive(parser):
 
     while True:
         try:
-            command_string = raw_input('> ')
+            command_string = input('> ')
             if command_string.startswith('python '):
                 LOG.info('HINT: No need to include "python" in interactive mode')
                 command_string = command_string.replace('python ', '', 1)
@@ -516,14 +518,14 @@ def run_interactive(parser):
             # potentially raise a ValueError about I/O operation.
             if isinstance(err, ValueError) and \
                str(err).find('I/O operation on closed file') == -1:
-                print "Error: " + str(err)
+                print("Error: " + str(err))
                 LOG.error(err)
                 raise err
-            print ''
-            print 'Quit via keyboard interrupt'
+            print('')
+            print('Quit via keyboard interrupt')
             break
         except EOFError:
-            print ''
+            print('')
             break
         except SystemExit:
             # optparse.OptParser prints the usage statement and calls
@@ -941,12 +943,12 @@ def main():
         try:
             run_once(options, args)
         except KeyboardInterrupt:
-            print ''
+            print('')
 
 
 def exit_from_int(*args):
     """Handler for SIGINT signal."""
-    print ''
+    print('')
     exit(0)
 
 

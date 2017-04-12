@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from __future__ import print_function
 import googlecl
 import googlecl.base
 import re
@@ -106,9 +107,9 @@ def _run_list(client, options, args):
     entries = client.GetVideos(user=options.owner or 'default',
                                titles=titles_list)
     for vid in entries:
-        print googlecl.base.compile_entry_string(VideoEntryToStringWrapper(vid),
+        print(googlecl.base.compile_entry_string(VideoEntryToStringWrapper(vid),
                                                  options.fields.split(','),
-                                                 delimiter=options.delimiter)
+                                                 delimiter=options.delimiter))
 
 
 def _run_post(client, options, args):

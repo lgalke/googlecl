@@ -24,6 +24,7 @@ List events for today:
 
 """
 __author__ = 'tom.h.miller@gmail.com (Tom Miller)'
+from builtins import input
 import gdata.calendar.service
 import googlecl.base
 import googlecl.service
@@ -182,7 +183,7 @@ class CalendarServiceCL(gdata.calendar.service.CalendarService,
                     msg = 'Delete "%s"?\n%s' %\
                           (safe_decode(event.title.text), prompt_str)
                     try:
-                        delete_selection = int(raw_input(safe_encode(msg)))
+                        delete_selection = int(input(safe_encode(msg)))
                     except ValueError:
                         continue
                 deletion_choice = option_list[delete_selection][1]

@@ -20,6 +20,8 @@ Defaults may be viewed/edited by calling 'edit defaults'
 TODO: Integrate ConfigParser
 """
 
+from __future__ import print_function
+from builtins import input
 import logging
 
 import simplejson as json
@@ -124,14 +126,14 @@ class DefaultManager:
         if not kwargs['prompt'] == 'none' and 'parameterOrder' in metinfo:
             for a in metinfo['parameterOrder']:  # Required parameters
                 if a not in kwargs:
-                    value = raw_input('Please specify ' + a + ': ')
+                    value = input('Please specify ' + a + ': ')
                     if not value:
                         return
                     kwargs[a] = value
         if kwargs['prompt'] == 'all' and 'parameters' in metinfo:
             for a in metinfo['parameters']:  # Optional parameters
                 if a not in kwargs:
-                    value = raw_input('Please specify ' + a + ': ')
+                    value = input('Please specify ' + a + ': ')
                     if value:
                         kwargs[a] = value
         if kwargs:
@@ -174,21 +176,21 @@ class DefaultManager:
                 json.dump(body, f, indent=2)
                 f.close()
                 cmd = '%s %s' % (kwargs['editor'], filename)
-                raw_input('Missing body...')
+                input('Missing body...')
                 subprocess.call(cmd, shell=True)
                 f = open(filename)
                 value = json.load(f)
                 f.close()
                 os.remove(filename)
             else:
-                print 'Missing body - Schema: ' + schemaname
+                print('Missing body - Schema: ' + schemaname)
                 sargs = ', '.join(schema['properties'])
-                print '  Args: ' + sargs
+                print('  Args: ' + sargs)
                 bodyparser = optparse.OptionParser()
                 for arg in doc['schemas'][metinfo['request']['$ref']]['properties']:
                     bodyparser.add_option('--' + arg)
                 (options, args) = bodyparser.parse_args(
-                    raw_input('Please specify body: ').split())
+                    input('Please specify body: ').split())
                 value = vars(options)
                 for arg in value.keys():
                     if value[arg] == None or value[arg] == '':

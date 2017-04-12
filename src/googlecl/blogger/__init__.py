@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from __future__ import print_function
 import googlecl
 import googlecl.base
 
@@ -90,10 +91,10 @@ def _run_list(client, options, args):
     entries = client.GetPosts(options.blog, titles_list,
                               user_id=options.owner or 'default')
     for entry in entries:
-        print googlecl.base.compile_entry_string(
+        print(googlecl.base.compile_entry_string(
             BloggerEntryToStringWrapper(entry),
             options.fields.split(','),
-            delimiter=options.delimiter)
+            delimiter=options.delimiter))
 
 
 def _run_tag(client, options, args):

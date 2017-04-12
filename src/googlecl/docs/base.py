@@ -27,6 +27,8 @@ Download docs:
 
 """
 from __future__ import with_statement
+from __future__ import print_function
+from builtins import input
 
 __author__ = 'tom.h.miller@gmail.com (Tom Miller)'
 import ConfigParser
@@ -132,7 +134,7 @@ class DocsBaseCL(object):
                          'you to finish editing your file.')
                 LOG.info('Hit enter in this shell when you finished editing and saved '
                          'your work.')
-                raw_input('')
+                input('')
         if file_hash and file_hash == _md5_hash_file(path):
             LOG.info('No modifications to file, not uploading.')
             return None
@@ -387,9 +389,9 @@ class DocsBaseCL(object):
                     str(err).find('Unsupported Media Type') != -1):
                 # Attempt to catch older gdata users and warn them when they try to upload
                 # unsupported file types
-                print "\n\nYour version of python-gdata may not support this action. "
-                print "Please see the wiki page for more details: "
-                print "http://code.google.com/p/googlecl/wiki/UploadingGoogleDocs\n\n"
+                print("\n\nYour version of python-gdata may not support this action. ")
+                print("Please see the wiki page for more details: ")
+                print("http://code.google.com/p/googlecl/wiki/UploadingGoogleDocs\n\n")
                 if convert:
                     LOG.info('You may have to specify a format with --format. Try ' +
                              '--format=txt')

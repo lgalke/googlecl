@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from __future__ import print_function
 import googlecl
 import googlecl.base
 import logging
@@ -145,10 +146,10 @@ def _run_list(client, options, args):
     folder_entries = client.get_folder(options.folder)
     entries = client.get_doclist(titles_list, folder_entries)
     for entry in entries:
-        print googlecl.base.compile_entry_string(
+        print(googlecl.base.compile_entry_string(
             googlecl.base.BaseEntryToStringWrapper(entry),
             options.fields.split(','),
-            delimiter=options.delimiter)
+            delimiter=options.delimiter))
 
 
 def _run_upload(client, options, args):

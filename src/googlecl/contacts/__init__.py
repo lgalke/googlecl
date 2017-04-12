@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from __future__ import print_function
 import googlecl
 import googlecl.base
 
@@ -145,10 +146,10 @@ def _run_list(client, options, args):
     titles_list = googlecl.build_titles_list(options.title, args)
     entries = client.GetContacts(titles_list)
     for entry in entries:
-        print googlecl.base.compile_entry_string(
+        print(googlecl.base.compile_entry_string(
             ContactsEntryToStringWrapper(entry),
             options.fields.split(','),
-            delimiter=options.delimiter)
+            delimiter=options.delimiter))
 
 
 def _run_add(client, options, args):
@@ -180,10 +181,10 @@ def _run_list_groups(client, options, args):
     titles_list = googlecl.build_titles_list(options.title, args)
     entries = client.GetGroups(titles_list)
     for entry in entries:
-        print googlecl.base.compile_entry_string(
+        print(googlecl.base.compile_entry_string(
             ContactsEntryToStringWrapper(entry),
             ['name'],
-            delimiter=options.delimiter)
+            delimiter=options.delimiter))
 
 # XXX: Don't require title for list tasks.
 TASKS = {'list': googlecl.base.Task('List contacts', callback=_run_list,

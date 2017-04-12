@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from __future__ import print_function
+
 """Subprogram for GoogleCL which handles all requests
    using the Discovery service
 
@@ -129,7 +131,7 @@ class DiscoveryManager():
             # Displays formatted output
             output.output(resp, self.dataManager.formatting)
         except Exception, err:
-            print 'Uncaught error'
+            print('Uncaught error')
             raise
 
     def apis_list(self):
@@ -171,7 +173,7 @@ def getMethod(service, doc, args):
             attr = getattr(attr, obj['methods'].keys()[0])
             obj = obj['methods'][obj['methods'].keys()[0]]
         else:
-            print 'Did not recognize task.'
+            print('Did not recognize task.')
             if 'methods' in obj:
                 LOG.error('Possible methods: ' + ', '.join(obj['methods']))
             if 'resources' in obj:
