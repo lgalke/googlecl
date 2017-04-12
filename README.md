@@ -2,7 +2,7 @@
 
 ## Python3 Compatibility
 
-This [fork](https://github.com/vinitkumar/googlecl.git) aims to provide python3 compatibility. We follow the guidelines of http://python-future.org/compatible_idioms.html to allow both python2 and python3 usage.
+This [fork](https://github.com/vinitkumar/googlecl.git) aims to provide python3 compatibility. We follow the guidelines of http://python-future.org/compatible_idioms.html to support both python2 and python3.
 
 [![Build Status](https://travis-ci.org/lgalke/googlecl.svg?branch=master)](https://travis-ci.org/lgalke/googlecl)
 
