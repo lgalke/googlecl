@@ -185,10 +185,10 @@ def get_xdg_path(filename, data_type, default_directories=None,
 
     if os.name == 'posix':
         default_dir = xdg_home_dir
-        mode = 0700
+        mode = 0o700
     else:
         default_dir = DEFAULT_GOOGLECL_DIR
-        mode = 0777
+        mode = 0o777
     if not os.path.isdir(default_dir) and create_missing_dir:
         try:
             os.makedirs(default_dir, mode)
