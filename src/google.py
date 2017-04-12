@@ -355,7 +355,7 @@ def import_service(service, config_file_path):
     LOG.debug('Your pythonpath: ' + str(os.environ.get('PYTHONPATH')))
     try:
         package = import_at_runtime('googlecl.' + service)
-    except ImportError, err:
+    except ImportError as err:
         LOG.error(err.args[0])
         LOG.error('Did you specify the service correctly? Must be one of ' +
                   str(AVAILABLE_SERVICES)[1:-1])
@@ -504,14 +504,14 @@ def run_interactive(parser):
             else:
                 try:
                     args_list = expand_as_command_line(command_string)
-                except Error, err:
+                except Error as err:
                     LOG.error(err)
                     continue
 
                 (options, args) = parse_command_line(parser, args_list)
                 run_once(options, args)
 
-        except (KeyboardInterrupt, ValueError), err:
+        except (KeyboardInterrupt, ValueError) as err:
             # It would be nice if we could simply unregister or reset the
             # signal handler defined in the initial if __name__ block.
             # Windows will raise a KeyboardInterrupt, GNU/Linux seems to also
@@ -729,7 +729,7 @@ def run_once(options, args):
         # the crash is because the client implements different tasks than what is expected here.
         #
         task.run(client, options, args)
-    except AttributeError, run_error:
+    except AttributeError as run_error:
         err_str = safe_decode(run_error)
         if err_str.startswith("'OAuth"):
             LOG.info('OAuth error.  Try re-running with --force-auth.')

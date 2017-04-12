@@ -397,7 +397,7 @@ class BaseCL(object):
                         time.sleep(self.retry_delay)
                 else:
                     raise err
-            except Exception, unexpected:
+            except Exception as unexpected:
                 LOG.debug('unexpected exception: %s' % unexpected)
                 LOG.debug('Arguments: %s' % str(args))
                 LOG.debug('Keyword arguments: %s' % kwargs)
@@ -690,10 +690,10 @@ def compile_entry_string(wrapped_entry, attribute_list, delimiter,
             # with the missing field value.
             val = getattr(wrapped_entry, attr.replace(
                 '-', '_')) or missing_field_value
-        except ValueError, err:
+        except ValueError as err:
             LOG.debug(err.args[0] +
                       ' (Did not add value for field ' + attr + ')')
-        except AttributeError, err:
+        except AttributeError as err:
             LOG.debug(err.args[0] + ' (value for field ' + attr + ')')
             try:
                 # Last ditch effort to blindly grab the attribute

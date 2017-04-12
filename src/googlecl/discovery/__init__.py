@@ -116,21 +116,21 @@ class DiscoveryManager():
             LOG.debug('Parsing parameters...')
             try:
                 kwargs = self.dataManager.fill_out_options(metinfo, doc, args)
-            except TypeError, err:
+            except TypeError as err:
                 raise
                 return
 
             LOG.debug('Executing method...')
             try:
                 resp = method(**kwargs).execute()
-            except Exception, err:
+            except Exception as err:
                 LOG.error(err)
                 return
 
             LOG.debug('Displaying output...')
             # Displays formatted output
             output.output(resp, self.dataManager.formatting)
-        except Exception, err:
+        except Exception as err:
             print('Uncaught error')
             raise
 

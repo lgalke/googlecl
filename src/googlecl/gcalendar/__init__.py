@@ -112,7 +112,7 @@ def filter_all_day_events_outside_range(start_date, end_date, events):
                 event.when[0].start_time, '%Y-%m-%d')
             end = datetime.datetime.strptime(
                 event.when[0].end_time, '%Y-%m-%d')
-        except ValueError, err:
+        except ValueError as err:
             if str(err).find('unconverted data remains') == -1:
                 raise err
             else:

@@ -171,76 +171,7 @@ class DocsBaseCL(object):
 
     EditDoc = edit_doc
 
-    def get_docs(self, base_path, entries, file_ext=None):
-        """Download documents.
-
-        Keyword arguments:
-          base_path: The path to download files to. This plus an entry's title plus
-                     its format-specific extension will form the complete path.
-          entries: List of DocEntry items representing the files to download.
-          file_ext: Suffix to give the file(s) when downloading.
-                    For example, "txt", "csv", "xcl". Default None to let
-                    get_extension_from_doctype decide the extension. Ignored
-                    when downloading arbitrary files.
-
-        """
-        import ipdb; ipdb.set_trace()
-        if not os.path.isdir(base_path):
-            if len(entries) > 1:
-                raise DocsError(safe_encode(u'Specified multiple source files, but ' +
-                                            u'destination "' + base_path +
-                                            u'" is not a directory'))
-            format_from_filename = googlecl.get_extension_from_path(base_path)
-            if format_from_filename and not file_ext:
-                # Strip the extension off here if it exists. Don't want to double up
-                # on extension in for loop. (+1 for '.')
-                base_path = base_path[:-(len(format_from_filename) + 1)]
-                # We can just set the file_ext here, since there's only one
-                # file.
-                file_ext = format_from_filename
-        for entry in entries:
-            # Don't set file_ext if we cannot do export.
-            # get_extension_from_doctype will check the config file for 'format'
-            # which will set an undesired entry_file_ext for
-            # unconverted downloads
-            if not file_ext and can_export(entry):
-                entry_file_ext = googlecl.docs.get_extension_from_doctype(
-                    googlecl.docs.get_document_type(entry),
-                    self.config)
-            else:
-                entry_file_ext = file_ext
-            if entry_file_ext:
-                LOG.debug('Decided file_ext is ' + entry_file_ext)
-                extension = '.' + entry_file_ext
-            else:
-                LOG.debug('Could not (or would not) set file_ext')
-                if can_export(entry):
-                    extension = '.txt'
-                else:
-                    # Files that cannot be exported typically have a file extension
-                    # in their name / title.
-                    extension = ''
-
-            entry_title = safe_decode(entry.title.text)
-            if os.path.isdir(base_path):
-                entry_title_safe = self.to_safe_filename(entry_title)
-                path = os.path.join(base_path, entry_title_safe + extension)
-            else:
-                path = base_path + extension
-            LOG.info(safe_encode('Downloading ' + entry_title + ' to ' + path))
-            try:
-                if can_export(entry):
-                    self.Export(entry, path)
-                else:
-                    self.Download(entry, path)
-            except self.request_error, err:
-                LOG.error(safe_encode('Download of ' + entry_title + ' failed: ' +
-                                      unicode(err)))
-            except EnvironmentError, err:
-                LOG.error(err)
-                LOG.info(
-                    'Does your destination filename contain invalid characters?')
-
+ as
     GetDocs = get_docs
 
     def _modify_entry(doc_entry, path_to_new_content, file_ext):

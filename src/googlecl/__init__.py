@@ -192,7 +192,7 @@ def get_xdg_path(filename, data_type, default_directories=None,
     if not os.path.isdir(default_dir) and create_missing_dir:
         try:
             os.makedirs(default_dir, mode)
-        except OSError, err:
+        except OSError as err:
             LOG.error(err)
             return ''
     return os.path.join(default_dir, filename)

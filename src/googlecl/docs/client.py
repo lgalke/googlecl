@@ -122,7 +122,7 @@ class DocsClientCL(gdata.docs.client.DocsClient,
            self.config.lazy_get(SECTION_HEADER, 'decode_utf_8', False, bool):
             try:
                 file_string = response_string.decode('utf-8-sig')
-            except UnicodeError, err:
+            except UnicodeError as err:
                 LOG.debug('Could not decode: ' + str(err))
                 file_string = response_string
         else:

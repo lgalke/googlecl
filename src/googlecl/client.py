@@ -116,7 +116,7 @@ class BaseClientCL(googlecl.base.BaseCL):
         if browser is not None:
             try:
                 browser.open(str(auth_url))
-            except Exception, err:
+            except Exception as err:
                 # Blanket catch of Exception is a bad idea, but don't want to pass in
                 # error to look for.
                 LOG.error('Failed to launch web browser: ' + unicode(err))

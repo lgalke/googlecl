@@ -68,7 +68,7 @@ class AuthenticationManager(object):
         """
         try:
             token_valid = self.client.IsTokenValid()
-        except AttributeError, err:
+        except AttributeError as err:
             # Attribute errors crop up when using different gdata libraries
             # but the same token.
             token_valid = False
@@ -104,11 +104,11 @@ class AuthenticationManager(object):
             LOG.debug(new_path + ' already exists. Deleting it.')
             try:
                 os.remove(new_path)
-            except EnvironmentError, err:
+            except EnvironmentError as err:
                 LOG.debug('Cannot remove old failed token file: ' + str(err))
         try:
             os.rename(self.tokens_path, new_path)
-        except EnvironmentError, err:
+        except EnvironmentError as err:
             LOG.debug('Cannot rename token file to ' +
                       new_path + ': ' + str(err))
 
@@ -146,13 +146,13 @@ class AuthenticationManager(object):
             with open(self.tokens_path, 'r+') as tokens_file:
                 try:
                     tokens_dict = pickle.load(tokens_file)
-                except ImportError, err:
+                except ImportError as err:
                     LOG.error(err)
                     LOG.info(
                         'You probably have been using different versions of gdata.')
                     self._move_failed_token_file()
                     return False
-                except IndexError, err:
+                except IndexError as err:
                     LOG.error(err)
                     self._move_failed_token_file()
                     return False
@@ -164,7 +164,7 @@ class AuthenticationManager(object):
                 else:
                     try:
                         pickle.dump(tokens_dict, tokens_file)
-                    except EnvironmentError, err:
+                    except EnvironmentError as err:
                         # IOError (extends enverror) shouldn't happen, but I've seen
                         # IOError Errno 0 pop up on Windows XP with Python 2.5.
                         LOG.error(err)
@@ -255,7 +255,7 @@ class AuthenticationManager(object):
                     LOG.error(err)
                     LOG.error('Failed to load token file (may be corrupted?)')
                     file_invalid = True
-                except ImportError, err:
+                except ImportError as err:
                     LOG.error(err)
                     LOG.info(
                         'You probably have been using different versions of gdata.')

@@ -95,7 +95,7 @@ class FinanceServiceCL(FinanceService, BaseServiceCL):
         pfl.portfolio_title = title
         try:
             return self.AddPortfolio(pfl)
-        except RequestError, err:
+        except RequestError as err:
             LOG.error('Failed to create portfolio: %s' % err[0]['body'])
 
     CreatePortfolio = create_portfolio
@@ -242,7 +242,7 @@ class FinanceServiceCL(FinanceService, BaseServiceCL):
         try:
             return self.AddTransaction(txn, portfolio_id=pfl.portfolio_id,
                                        ticker_id=ticker)
-        except RequestError, err:
+        except RequestError as err:
             LOG.error('Failed to create transaction: %s' % err[0]['body'])
 
 

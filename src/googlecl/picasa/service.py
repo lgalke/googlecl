@@ -310,12 +310,12 @@ class PhotosServiceCL(PhotosService, googlecl.service.BaseServiceCL):
                                        filename_or_handle=path,
                                        keywords=keywords,
                                        content_type=content_type)
-            except GooglePhotosException, err:
+            except GooglePhotosException as err:
                 LOG.error('Failed to upload %s. (%s: %s)', path,
                           err.args[0],
                           err.args[1])
                 failures.append(file)
-            except Exception, err:
+            except Exception as err:
                 # Don't let a stray error wreck an upload of 1000 photos
                 LOG.error(safe_encode('Unexpected error -- ' + unicode(err)))
                 failures.append(file)

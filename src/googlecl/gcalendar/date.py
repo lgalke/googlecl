@@ -430,7 +430,7 @@ class DateParser(object):
         for time_format in possible_formats:
             try:
                 date = datetime.datetime.strptime(time_string, time_format)
-            except ValueError, err:
+            except ValueError as err:
                 continue
             else:
                 return date, time_format
