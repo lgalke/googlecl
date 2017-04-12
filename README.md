@@ -4,7 +4,7 @@
 
 This [fork](https://github.com/vinitkumar/googlecl.git) aims to provide python3 compatibility. We follow the guidelines of http://python-future.org/compatible_idioms.html to allow both python2 and python3 usage.
 
-[![Build Status](https://travis-ci.org/vinitkumar/googlecl.svg?branch=master)](https://travis-ci.org/vinitkumar/googlecl)
+[![Build Status](https://travis-ci.org/lgalke/googlecl.svg?branch=master)](https://travis-ci.org/lgalke/googlecl)
 
 GoogleCL is a command line utility to use google services like picasa, youtube, blogger etc.
 
