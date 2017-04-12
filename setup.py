@@ -14,6 +14,7 @@
 
 from __future__ import with_statement
 from __future__ import print_function
+from io import open
 
 try:
   from setuptools import setup
@@ -44,11 +45,11 @@ if os.path.exists(SCRIPT_TO_INSTALL):
     """Return a binary md5 checksum of file at path."""
     import hashlib
     hash_function = hashlib.md5()
-    with open(path, 'r') as my_file:
-      data = my_file.read(read_size).encode('utf-8')
+    with open(path, 'r', encoding='utf-8') as my_file:
+      data = my_file.read(read_size)
       while data:
         hash_function.update(data)
-        data = my_file.read(read_size).encode('utf-8')
+        data = my_file.read(read_size)
     return hash_function.digest()
   # If running from trunk, SCRIPT_TO_RENAME should exist.
   # For the distributed tarball, they should not.
