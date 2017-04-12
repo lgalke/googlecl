@@ -13,6 +13,7 @@
 # limitations under the License.
 
 from __future__ import with_statement
+from __future__ import print_function
 
 try:
   from setuptools import setup
@@ -53,10 +54,10 @@ if os.path.exists(SCRIPT_TO_INSTALL):
   # For the distributed tarball, they should not.
   if os.path.exists(SCRIPT_TO_RENAME) and\
      not _md5_hash_file(SCRIPT_TO_INSTALL) == _md5_hash_file(SCRIPT_TO_RENAME):
-    print SCRIPT_TO_INSTALL + ' exists and is not the same as ' +\
-          SCRIPT_TO_RENAME
-    print 'Not trusting ' + SCRIPT_TO_INSTALL
-    print 'Please update it or remove it.'
+    print(SCRIPT_TO_INSTALL + ' exists and is not the same as ' +\
+          SCRIPT_TO_RENAME)
+    print('Not trusting ' + SCRIPT_TO_INSTALL)
+    print('Please update it or remove it.')
     exit(-1)
 else:
   shutil.copy(SCRIPT_TO_RENAME, SCRIPT_TO_INSTALL)
