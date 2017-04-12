@@ -46,10 +46,10 @@ if os.path.exists(SCRIPT_TO_INSTALL):
     import hashlib
     hash_function = hashlib.md5()
     with open(path, 'r', encoding='utf-8') as my_file:
-      data = my_file.read(read_size)
+      data = my_file.read(read_size).encode('utf-8')
       while data:
         hash_function.update(data)
-        data = my_file.read(read_size)
+        data = my_file.read(read_size).encode('utf-8')
     return hash_function.digest()
   # If running from trunk, SCRIPT_TO_RENAME should exist.
   # For the distributed tarball, they should not.

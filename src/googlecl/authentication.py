@@ -251,7 +251,7 @@ class AuthenticationManager(object):
             with open(self.tokens_path, 'rb') as tokens_file:
                 try:
                     tokens_dict = pickle.load(tokens_file)
-                except (KeyError, IndexError), err:
+                except (KeyError, IndexError) as err:
                     LOG.error(err)
                     LOG.error('Failed to load token file (may be corrupted?)')
                     file_invalid = True

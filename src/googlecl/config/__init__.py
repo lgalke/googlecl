@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import ConfigParser
+from configparser import ConfigParser
 import googlecl
 import parser
 
@@ -79,7 +79,7 @@ def load_configuration(path=None):
         if not path:
             LOG.error('Could not create config directory!')
             return False
-    config = parser.ConfigParser(ConfigParser.ConfigParser)
+    config = parser.ConfigParser(ConfigParser)
     config.associate(path)
     made_changes = config.ensure_basic_options(_create_basic_options())
     if made_changes:
